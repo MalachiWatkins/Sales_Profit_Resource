@@ -2,47 +2,57 @@ import requests
 import json
 import time
 import pdb
+from statistics import mean
 #pdb.set_trace()
 
-# Get items necessary for prediction form individual listings
-MinPrice = []
-AvgPrice = []
-HighestPrice = []
 
 # Zero Bids Mean no sale
 Bids = [] # Sell Through Basically a % of this number that is zero vs above 2
 
 Top_20 = [] # First 20 Results
+prices = []
 def get_key_data():
     Key_word = "Test"
     page_number = 1
     pages_to_search = 5 # Number of Pages to Search
 
     while page_number < pages_to_search:
+        print(page_number)
         Keyword_payload = {"isSize":False,"isWeddingCatagory":"False","isMultipleCategoryIds":False,"isFromHeaderMenuTab":False,"layout":"","searchText":Key_word,"selectedGroup":"","selectedCategoryIds":"","selectedSellerIds":"","lowPrice":"0","highPrice":"999999","searchBuyNowOnly":"","searchPickupOnly":"False","searchNoPickupOnly":"False","searchOneCentShippingOnly":"False","searchDescriptions":"False","searchClosedAuctions":"true","closedAuctionEndingDate":"6/16/2022","closedAuctionDaysBack":"150","searchCanadaShipping":"False","searchInternationalShippingOnly":"False","sortColumn":"1","page":page_number,"pageSize":"40","sortDescending":"true","savedSearchId":0,"useBuyerPrefs":"true","searchUSOnlyShipping":"true","categoryLevelNo":"1","categoryLevel":1,"categoryId":0,"partNumber":"","catIds":""}
 
         response = requests.post('https://buyerapi.shopgoodwill.com/api/Search/ItemListing', json=Keyword_payload)
         json_response = response.json()
 
         Results = json_response["searchResults"]
-        price = []
-        # print(Results['items'][0]['title'])
-        # time.sleep(1000)
+
         for individual_listing in Results['items']:
             Bids.append(individual_listing["numBids"]) # Gets Number of Bids
-            #print(individual_listing["numBids"])
+            prices.append(individual_listing["currentPrice"])
+            if len(Top_20) == 19: # Gets Top 20 Results for Dislpay
+                null = 'null'
+            else:
+                Top_20.append(individual_listing)
 
         page_number += 1
-        print(Bids)
-    #, headers={'content-length': '1'})
+    return
 
+def weight():
+    # Get items necessary for prediction form individual listings
+    MinPrice = []
+    AvgPrice = []
+    HighestPrice = []
 
+    min_price = min(prices)
+    max_price = max(prices)
+    avg_price = mean(prices) #round(avg_price)
 
-
-    time.sleep(1000)
 
     return
+
 get_key_data()
+weight()
+time.sleep(1000)
+
 # Keyword Flagging
 def keyword_flagging():
 
