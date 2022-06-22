@@ -9,8 +9,15 @@ from statistics import mean
 
 Bids = [] # Number of Bids
 Top_20 = [] # First 20 Results
-prices = []
+prices = [] # Price for all Listings
+MinPrice = []
+AvgPrice = []
+HighestPrice = []
+SellThrough = []
 
+####################################################
+############# Grabs Key Data #######################
+####################################################
 def get_key_data():
     Key_word = "Test"
     page_number = 1
@@ -36,10 +43,7 @@ def get_key_data():
         page_number += 1
     return
 
-MinPrice = []
-AvgPrice = []
-HighestPrice = []
-SellThrough = []
+
 def weight():
 
     min_price = min(prices)
