@@ -19,6 +19,17 @@ HighestPrice = [] # Highest Price for Listings
 SellThrough = [] # Sell Through Percentage
 
 ####################################################
+############# Data Base #######################
+####################################################
+
+####################################################
+############# Key word Flagging #######################
+####################################################
+def keyword_flagging():
+
+    return
+
+####################################################
 ############# Grabs Key Data #######################
 ####################################################
 def get_key_data():
@@ -70,10 +81,6 @@ get_key_data()
 weight()
 time.sleep(1000)
 
-# Keyword Flagging
-def keyword_flagging():
-
-    return
 # Prediction Calculator
 
 
