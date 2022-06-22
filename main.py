@@ -9,7 +9,10 @@ from statistics import mean
 ############# TO-DO ############################
 ####################################################
 
-
+# Add A temp Config
+# Finish Prediction Generator
+# Start Django Rest API
+# Start Django Site; Apps, Users, Main
 
 ###################################################
 
