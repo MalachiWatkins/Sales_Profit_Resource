@@ -5,6 +5,14 @@ import pdb
 from statistics import mean
 #pdb.set_trace()
 
+####################################################
+############# TO-DO ############################
+####################################################
+
+
+
+###################################################
+
 Key_word = "Test" # Keyword for Seacrch
 pages_to_search = 5 # Number of Pages to Search
 page_number = 1  # Starting Page Number
@@ -73,7 +81,9 @@ def config(): # Gets Configs
 
 # DATABASE TO DO INTERNALLY IN DJANGO
 # USERs, KEYWORD FLAGGED
+
     # KEY WORD EXAMPLE
+
     # Key_Word_Flag_Approved_Document = {
     #     Key_word: 'Test',
     #     Key_word_DesL: 'Flagged for EXAMPLE REASON',
