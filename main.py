@@ -22,7 +22,7 @@ SellThrough = [] # Sell Through Percentage
 ############# Data Base ############################
 ####################################################
 
-# TO DO ALL DATA BAS STUFF
+# ALL THIS WILL BE A DJANGO REST API
 def config(): # Gets Configs
 
     # Weight_Config = {
@@ -71,34 +71,25 @@ def config(): # Gets Configs
 
     return
 
-####################################################
-############# Users ################################
-####################################################
-
-def create_user():
-
-    return
-
-def user_login():
-
-    return
+# DATABASE TO DO INTERNALLY IN DJANGO
+# USERs, KEYWORD FLAGGED
+    # KEY WORD EXAMPLE
+    # Key_Word_Flag_Approved_Document = {
+    #     Key_word: 'Test',
+    #     Key_word_DesL: 'Flagged for EXAMPLE REASON',
+    #     Key_word_Rating: '4', # 4/5
+    # }
+    #
+    # Key_Word_Flag_Pending_Document = {
+    #     Key_word: 'Pending',
+    #     Key_word_Des: 'Flagged for EXAMPLE REASON',
+    # }
 
 ####################################################
 ############# Key word Flagging ####################
 ####################################################
 
 def keyword_flagging_Check(): # Checks if Current Keyword flagged
-
-    Key_Word_Flag_Approved_Document = {
-        Key_word: 'Test',
-        Key_word_DesL: 'Flagged for EXAMPLE REASON',
-        Key_word_Rating: '4', # 4/5
-    }
-
-    Key_Word_Flag_Pending_Document = {
-        Key_word: 'Pending',
-        Key_word_Des: 'Flagged for EXAMPLE REASON',
-    }
 
     return
 
@@ -135,6 +126,9 @@ def get_key_data():
         page_number += 1
     return
 
+####################################################
+########## Get Data Needed for Weighting ###########
+####################################################
 
 def weight():
 
@@ -154,14 +148,14 @@ def weight():
     SellThrough.append(sell_through_percent)
     return
 
-get_key_data()
-weight()
-time.sleep(1000)
+####################################################
+########## Return Prediction ###########
+####################################################
 
-# Prediction Calculator
-
-
-##### CFG goes here #######
 def return_Prediction():
 
     return
+
+get_key_data()
+weight()
+time.sleep(1000)
