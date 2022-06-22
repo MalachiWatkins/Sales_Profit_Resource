@@ -10,10 +10,11 @@ from statistics import mean
 Bids = [] # Number of Bids
 Top_20 = [] # First 20 Results
 prices = [] # Price for all Listings
-MinPrice = []
-AvgPrice = []
-HighestPrice = []
-SellThrough = []
+
+MinPrice = [] # Minimum Price for Listings
+AvgPrice = [] # Average Price for Listings
+HighestPrice = [] # Highest Price for Listings
+SellThrough = [] # Sell Through Percentage
 
 ####################################################
 ############# Grabs Key Data #######################
