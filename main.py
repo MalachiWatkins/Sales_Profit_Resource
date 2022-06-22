@@ -19,13 +19,90 @@ HighestPrice = [] # Highest Price for Listings
 SellThrough = [] # Sell Through Percentage
 
 ####################################################
-############# Data Base #######################
+############# Data Base ############################
 ####################################################
 
+# TO DO ALL DATA BAS STUFF
+def config(): # Gets Configs
+
+    # Weight_Config = {
+    #     MinPrice: {
+    #     Type: "USD",
+    #     Total_Weight: 1.00,
+    #     Zero: 5,
+    #     Max: 15,
+    #     Weight: {
+    #         Value: 1,
+    #         Added_Weight: 0.1,
+    #         }
+    #     },
+    #     AvgPrice: {
+    #     Type: "USD",
+    #     Total_Weight: 5.00,
+    #     Zero: ,
+    #     Max: ,
+    #     Weight: {
+    #         Value: ,
+    #         Added_Weight: ,
+    #         }
+    #     },
+    #     HighestPrice: {
+    #     Type: "USD",
+    #     Total_Weight: 1.50,
+    #     Zero: ,
+    #     Max: ,
+    #     Weight: {
+    #         Value: ,
+    #         Added_Weight: ,
+    #         }
+    #     },
+    #     SellThrough: {
+    #         Type: "%",
+    #         Total_Weight" 2.50,
+    #         Zero: 37,
+    #         Max: 57,
+    #         Weight: {
+    #             Value: 1,
+    #             Weight: 0.125
+    #         }
+    #     },
+    # }
+
+
+    return
+
 ####################################################
-############# Key word Flagging #######################
+############# Users ################################
 ####################################################
-def keyword_flagging():
+
+def create_user():
+
+    return
+
+def user_login():
+
+    return
+
+####################################################
+############# Key word Flagging ####################
+####################################################
+
+def keyword_flagging_Check(): # Checks if Current Keyword flagged
+
+    Key_Word_Flag_Approved_Document = {
+        Key_word: 'Test',
+        Key_word_DesL: 'Flagged for EXAMPLE REASON',
+        Key_word_Rating: '4', # 4/5
+    }
+
+    Key_Word_Flag_Pending_Document = {
+        Key_word: 'Pending',
+        Key_word_Des: 'Flagged for EXAMPLE REASON',
+    }
+
+    return
+
+def keyword_flagging_new(): # Create a new Kewword flag
 
     return
 
@@ -86,65 +163,5 @@ time.sleep(1000)
 
 ##### CFG goes here #######
 def return_Prediction():
-
-    return
-def data_base():
-    # Key_Word_Flag_Approved_Document = {
-    #     Key_word: 'Test',
-    #     Key_word_DesL: 'Flagged for EXAMPLE REASON',
-    #     Key_word_Rating: '4', # 4/5
-    # }
-    # Key_Word_Flag_Pending_Document = {
-    #     Key_word: 'Pending',
-    #     Key_word_Des: 'Flagged for EXAMPLE REASON',
-    # }
-    # Weight_Config = {
-    #     MinPrice: {
-    #     Type: "USD",
-    #     Total_Weight: 1.00,
-    #     Zero: 5,
-    #     Max: 15,
-    #     Weight: {
-    #         Value: 1,
-    #         Added_Weight: 0.1,
-    #         }
-    #     },
-    #     AvgPrice: {
-    #     Type: "USD",
-    #     Total_Weight: 5.00,
-    #     Zero: ,
-    #     Max: ,
-    #     Weight: {
-    #         Value: ,
-    #         Added_Weight: ,
-    #         }
-    #     },
-    #     HighestPrice: {
-    #     Type: "USD",
-    #     Total_Weight: 1.50,
-    #     Zero: ,
-    #     Max: ,
-    #     Weight: {
-    #         Value: ,
-    #         Added_Weight: ,
-    #         }
-    #     },
-    #     SellThrough: {
-    #         Type: "%",
-    #         Total_Weight" 2.50,
-    #         Zero: 37,
-    #         Max: 57,
-    #         Weight: {
-    #             Value: 1,
-    #             Weight: 0.125
-    #         }
-    #     },
-    # }
-    #
-    # User = {
-    #     User_Name = 'MWatkins',
-    #     Pass_Word_Hashed = '',
-    #     Is_Admin = True,
-    # }
 
     return
