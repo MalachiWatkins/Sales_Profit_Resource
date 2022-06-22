@@ -5,7 +5,9 @@ import pdb
 from statistics import mean
 #pdb.set_trace()
 
-
+Key_word = "Test" # Keyword for Seacrch
+pages_to_search = 5 # Number of Pages to Search
+page_number = 1  # Starting Page Number
 
 Bids = [] # Number of Bids
 Top_20 = [] # First 20 Results
@@ -20,12 +22,11 @@ SellThrough = [] # Sell Through Percentage
 ############# Grabs Key Data #######################
 ####################################################
 def get_key_data():
-    Key_word = "Test"
-    page_number = 1
-    pages_to_search = 5 # Number of Pages to Search
 
-    while page_number < pages_to_search:
-        print(page_number)
+    ############ API Call ##############
+    while page_number < pages_to_search = 1: # Search all pages up to pages_to_search
+
+        #### Json Payload for searching API #####
         Keyword_payload = {"isSize":False,"isWeddingCatagory":"False","isMultipleCategoryIds":False,"isFromHeaderMenuTab":False,"layout":"","searchText":Key_word,"selectedGroup":"","selectedCategoryIds":"","selectedSellerIds":"","lowPrice":"0","highPrice":"999999","searchBuyNowOnly":"","searchPickupOnly":"False","searchNoPickupOnly":"False","searchOneCentShippingOnly":"False","searchDescriptions":"False","searchClosedAuctions":"true","closedAuctionEndingDate":"6/16/2022","closedAuctionDaysBack":"150","searchCanadaShipping":"False","searchInternationalShippingOnly":"False","sortColumn":"1","page":page_number,"pageSize":"40","sortDescending":"true","savedSearchId":0,"useBuyerPrefs":"true","searchUSOnlyShipping":"true","categoryLevelNo":"1","categoryLevel":1,"categoryId":0,"partNumber":"","catIds":""}
 
         response = requests.post('https://buyerapi.shopgoodwill.com/api/Search/ItemListing', json=Keyword_payload)
