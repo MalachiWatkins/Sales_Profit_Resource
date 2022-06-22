@@ -6,11 +6,11 @@ from statistics import mean
 #pdb.set_trace()
 
 
-# Zero Bids Mean no sale
-Bids = [] # Sell Through Basically a % of this number that is zero vs above 2
 
+Bids = [] # Number of Bids
 Top_20 = [] # First 20 Results
 prices = []
+
 def get_key_data():
     Key_word = "Test"
     page_number = 1
@@ -36,17 +36,26 @@ def get_key_data():
         page_number += 1
     return
 
+MinPrice = []
+AvgPrice = []
+HighestPrice = []
+SellThrough = []
 def weight():
-    # Get items necessary for prediction form individual listings
-    MinPrice = []
-    AvgPrice = []
-    HighestPrice = []
 
     min_price = min(prices)
     max_price = max(prices)
     avg_price = mean(prices) #round(avg_price)
 
+    did_not_sell = []
+    for bid in Bids:
+        if bid == 0 or bid == 1:
+            did_not_sell.append(bid)
+        else:
+            null = 'null'
 
+    sell_through = len(did_not_sell) / len(Bids)
+    sell_through_percent = sell_through * 100
+    SellThrough.append(sell_through_percent)
     return
 
 get_key_data()
