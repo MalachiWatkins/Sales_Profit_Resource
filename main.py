@@ -33,54 +33,7 @@ SellThrough = [] # Sell Through Percentage
 ############# Data Base ############################
 ####################################################
 
-# ALL THIS WILL BE A DJANGO REST API
-def config(): # Gets Configs
 
-    # Weight_Config = {
-    #     MinPrice: {
-    #     Type: "USD",
-    #     Total_Weight: 1.00,
-    #     Zero: 5,
-    #     Max: 15,
-    #     Weight: {
-    #         Value: 1,
-    #         Added_Weight: 0.1,
-    #         }
-    #     },
-    #     AvgPrice: {
-    #     Type: "USD",
-    #     Total_Weight: 5.00,
-    #     Zero: ,
-    #     Max: ,
-    #     Weight: {
-    #         Value: ,
-    #         Added_Weight: ,
-    #         }
-    #     },
-    #     HighestPrice: {
-    #     Type: "USD",
-    #     Total_Weight: 1.50,
-    #     Zero: ,
-    #     Max: ,
-    #     Weight: {
-    #         Value: ,
-    #         Added_Weight: ,
-    #         }
-    #     },
-    #     SellThrough: {
-    #         Type: "%",
-    #         Total_Weight" 2.50,
-    #         Zero: 37,
-    #         Max: 57,
-    #         Weight: {
-    #             Value: 1,
-    #             Weight: 0.125
-    #         }
-    #     },
-    # }
-
-
-    return
 
 # DATABASE TO DO INTERNALLY IN DJANGO
 # USERs, KEYWORD FLAGGED
@@ -116,7 +69,7 @@ def keyword_flagging_new(): # Create a new Kewword flag
 def get_key_data():
 
     ############ API Call ##############
-    while page_number < pages_to_search = 1: # Search all pages up to pages_to_search
+    while page_number < pages_to_search == 1: # Search all pages up to pages_to_search
 
         #### Json Payload for searching API #####
         Keyword_payload = {"isSize":False,"isWeddingCatagory":"False","isMultipleCategoryIds":False,"isFromHeaderMenuTab":False,"layout":"","searchText":Key_word,"selectedGroup":"","selectedCategoryIds":"","selectedSellerIds":"","lowPrice":"0","highPrice":"999999","searchBuyNowOnly":"","searchPickupOnly":"False","searchNoPickupOnly":"False","searchOneCentShippingOnly":"False","searchDescriptions":"False","searchClosedAuctions":"true","closedAuctionEndingDate":"6/16/2022","closedAuctionDaysBack":"150","searchCanadaShipping":"False","searchInternationalShippingOnly":"False","sortColumn":"1","page":page_number,"pageSize":"40","sortDescending":"true","savedSearchId":0,"useBuyerPrefs":"true","searchUSOnlyShipping":"true","categoryLevelNo":"1","categoryLevel":1,"categoryId":0,"partNumber":"","catIds":""}
@@ -142,13 +95,76 @@ def get_key_data():
 ####################################################
 ########## Get Data Needed for Weighting ###########
 ####################################################
+# ALL THIS WILL BE A DJANGO REST API
+
+
+Weight_Config = {
+    'MinPrice': {
+    'Type': "USD",
+    'Total_Weight': 1.00,
+    'Zero': 5,
+    'Max': 15,
+    'Weight': {
+        'Value': 1,
+        'Added_Weight': 0.1,
+        }
+    },
+    'AvgPrice': {
+    'Type': "USD",
+    'Total_Weight': 5.00,
+    'Zero': 10 ,
+    'Max': 15 ,
+    'Weight': {
+        'Value': 1 ,
+        'Added_Weight': 1.00 ,
+        }
+    },
+    'HighestPrice': {
+    'Type': "USD",
+    'Total_Weight': 1.50,
+    'Zero': 10 ,
+    'Max': 15 ,
+    'Weight': {
+        'Value': 1 ,
+        'Added_Weight': 0.3 ,
+        }
+    },
+    'SellThrough': {
+        'Type': "%",
+        'Total_Weight': 2.50,
+        'Zero': 37,
+        'Max': 57,
+        'Weight': {
+            'Value': 1,
+            'Weight': 0.125
+        }
+    },
+    'Prediction': {
+        'TOTAL': 9,
+        'Sell Max': 9.00,
+        'Sell Min': 4.32,
+        'User Discretion Max': 4.31,
+        'User Discretion Min': 1,
+        'No Sell Max': 3.82,
+        'No Sell Min': 0.00,
+
+    },
+}
+
+MinPrice = [] # Minimum Price for Listings
+AvgPrice = [] # Average Price for Listings
+HighestPrice = [] # Highest Price for Listings
+SellThrough = [] # Sell Through Percentage
+
 
 def weight():
 
     min_price = min(prices)
     max_price = max(prices)
     avg_price = mean(prices) #round(avg_price)
-
+    MinPrice.append(min_price)
+    HighestPrice.append(max_price)
+    AvgPrice.append()
     did_not_sell = []
     for bid in Bids:
         if bid == 0 or bid == 1:
@@ -166,9 +182,15 @@ def weight():
 ####################################################
 
 def return_Prediction():
+    Min_Final_Weight = []
+    # total_weight = Weight_Config[]
+    ######## Min Weight ###############
 
+    print(Weight_Config['MinPrice']['Zero'])
+    if MinPrice[0] == Weight_Config['MinPrice']['Zero']:
+        Min_Final_Weight.append()
     return
-
-get_key_data()
-weight()
+return_Prediction()
+# get_key_data()
+# weight()
 time.sleep(1000)
