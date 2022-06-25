@@ -9,7 +9,7 @@ from statistics import mean
 ############# TO-DO ############################
 ####################################################
 
-# Add A temp Config
+
 # Finish Prediction Generator
 # Start Django Rest API
 # Start Django Site; Apps, Users, Main
@@ -30,23 +30,7 @@ SellThrough = [] # Sell Through Percentage
 ############# Data Base ############################
 ####################################################
 
-
-
-# DATABASE TO DO INTERNALLY IN DJANGO
-# USERs, KEYWORD FLAGGED
-
-    # KEY WORD EXAMPLE
-
-    # Key_Word_Flag_Approved_Document = {
-    #     Key_word: 'Test',
-    #     Key_word_DesL: 'Flagged for EXAMPLE REASON',
-    #     Key_word_Rating: '4', # 4/5
-    # }
-    #
-    # Key_Word_Flag_Pending_Document = {
-    #     Key_word: 'Pending',
-    #     Key_word_Des: 'Flagged for EXAMPLE REASON',
-    # }
+############ Place Holder for django model #########
 
 ####################################################
 ############# Key word Flagging ####################
@@ -64,9 +48,11 @@ def keyword_flagging_new(): # Create a new Kewword flag
 ############# Grabs Key Data #######################
 ####################################################
 def get_key_data():
+    ############# Global Vars for api payload ################
     Key_word = "Test" # Keyword for Seacrch
     pages_to_search = 5 # Number of Pages to Search
     page_number = 1  # Starting Page Number
+    ##########################################################
 
     ############ API Call ##############
     while page_number < pages_to_search: # Search all pages up to pages_to_search
@@ -76,7 +62,6 @@ def get_key_data():
 
         response = requests.post('https://buyerapi.shopgoodwill.com/api/Search/ItemListing', json=Keyword_payload) # Json response from API
         json_response = response.json()
-
 
         ######## Parse all listings and get the key data used for Prediction ########
         Results = json_response["searchResults"]
@@ -88,17 +73,43 @@ def get_key_data():
                 null = 'null'
             else:
                 Top_20.append(individual_listing)
-
         page_number += 1
     return
 
 ####################################################
-########## Get Data Needed for Weighting ###########
+####### Parsing Data Needed for Weighting ##########
 ####################################################
-# ALL THIS WILL BE A DJANGO REST API
 
 
 
+def weight():
+    ####### Parsing Data #########
+    min_price = min(prices)
+    max_price = max(prices)
+    avg_price = mean(prices)
+
+    ######## Appends Parsed Data for use in Prediction function ##########
+    MinPrice.append(min_price)
+    HighestPrice.append(max_price)
+    AvgPrice.append(avg_price)
+
+    ###### Sell Through Calculation #####
+    did_not_sell = []
+    for bid in Bids:
+        if bid == 0 or bid == 1:
+            did_not_sell.append(bid)
+
+    ######## Sell Through Percentage Calculator###############
+    sell_through = len(did_not_sell) / len(Bids)
+    sell_through_percent = sell_through * 100
+    SellThrough.append(sell_through_percent)
+    return
+
+####################################################
+########## Return Prediction #######################
+####################################################
+
+# THIS IS TEMP AND WILL BE A DJANGO REST API ONCE TESTING IS DONE
 Weight_Config = {
     'MinPrice': {
     'Type': "USD",
@@ -152,38 +163,9 @@ Weight_Config = {
     },
 }
 
-# MinPrice = [] # Minimum Price for Listings
-# AvgPrice = [] # Average Price for Listings
-# HighestPrice = [] # Highest Price for Listings
-# SellThrough = [] # Sell Through Percentage
-#
-
-def weight():
-    min_price = min(prices)
-    max_price = max(prices)
-    avg_price = mean(prices) #round(avg_price)
-    MinPrice.append(min_price)
-    HighestPrice.append(max_price)
-    AvgPrice.append(avg_price)
-    did_not_sell = []
-    for bid in Bids:
-        if bid == 0 or bid == 1:
-            did_not_sell.append(bid)
-        else:
-            null = 'null'
-
-    sell_through = len(did_not_sell) / len(Bids)
-    sell_through_percent = sell_through * 100
-    SellThrough.append(sell_through_percent)
-    return
-
-####################################################
-########## Return Prediction ###########
-####################################################
 Final_Weight = []
 def return_Prediction():
 
-    # total_weight = Weight_Config[]
     ######## Min Weight ###############
 
     if MinPrice[0] == Weight_Config['MinPrice']['Max']:
