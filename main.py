@@ -159,7 +159,6 @@ Weight_Config = {
 #
 
 def weight():
-
     min_price = min(prices)
     max_price = max(prices)
     avg_price = mean(prices) #round(avg_price)
@@ -181,24 +180,32 @@ def weight():
 ####################################################
 ########## Return Prediction ###########
 ####################################################
-
+Final_Weight = []
 def return_Prediction():
-    Final_Weight = []
+
     # total_weight = Weight_Config[]
     ######## Min Weight ###############
 
-    print(Weight_Config['MinPrice']['Zero'])
     if MinPrice[0] == Weight_Config['MinPrice']['Max']:
         Final_Weight.append(Weight_Config['MinPrice']['Total_Weight'])
     elif MinPrice[0] == Weight_Config['MinPrice']['Zero']:
         Final_Weight.append(0.00)
-    else:
+    elif MinPrice[0] >= Weight_Config['MinPrice']['Zero']:
         Min_Weight_p_1 = MinPrice[0] - Weight_Config['MinPrice']['Zero']
         Min_Weight_p_2 =  Min_Weight_p_1 * Weight_Config['MinPrice']['Weight']['Added_Weight']
+        Final_Weight.append(Min_Weight_p_2)
+    else:
+        Final_Weight.append(0.00)
+
+    ########### AVG Price ##############
+
     # Sell Through percent is based on percentage not sold base weight accordingly
-    #
+
     return
+
+
+get_key_data()
+weight()
 return_Prediction()
-# get_key_data()
-# weight()
+print(Final_Weight)
 time.sleep(1000)
