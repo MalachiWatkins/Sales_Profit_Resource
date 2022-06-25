@@ -16,9 +16,6 @@ from statistics import mean
 
 ###################################################
 
-Key_word = "Test" # Keyword for Seacrch
-pages_to_search = 5 # Number of Pages to Search
-page_number = 1  # Starting Page Number
 
 Bids = [] # Number of Bids
 Top_20 = [] # First 20 Results
@@ -67,9 +64,12 @@ def keyword_flagging_new(): # Create a new Kewword flag
 ############# Grabs Key Data #######################
 ####################################################
 def get_key_data():
+    Key_word = "Test" # Keyword for Seacrch
+    pages_to_search = 5 # Number of Pages to Search
+    page_number = 1  # Starting Page Number
 
     ############ API Call ##############
-    while page_number < pages_to_search == 1: # Search all pages up to pages_to_search
+    while page_number < pages_to_search: # Search all pages up to pages_to_search
 
         #### Json Payload for searching API #####
         Keyword_payload = {"isSize":False,"isWeddingCatagory":"False","isMultipleCategoryIds":False,"isFromHeaderMenuTab":False,"layout":"","searchText":Key_word,"selectedGroup":"","selectedCategoryIds":"","selectedSellerIds":"","lowPrice":"0","highPrice":"999999","searchBuyNowOnly":"","searchPickupOnly":"False","searchNoPickupOnly":"False","searchOneCentShippingOnly":"False","searchDescriptions":"False","searchClosedAuctions":"true","closedAuctionEndingDate":"6/16/2022","closedAuctionDaysBack":"150","searchCanadaShipping":"False","searchInternationalShippingOnly":"False","sortColumn":"1","page":page_number,"pageSize":"40","sortDescending":"true","savedSearchId":0,"useBuyerPrefs":"true","searchUSOnlyShipping":"true","categoryLevelNo":"1","categoryLevel":1,"categoryId":0,"partNumber":"","catIds":""}
@@ -98,6 +98,7 @@ def get_key_data():
 # ALL THIS WILL BE A DJANGO REST API
 
 
+
 Weight_Config = {
     'MinPrice': {
     'Type': "USD",
@@ -117,7 +118,7 @@ Weight_Config = {
     'Weight': {
         'Value': 1 ,
         'Added_Weight': 1.00 ,
-        }
+        },
     },
     'HighestPrice': {
     'Type': "USD",
@@ -151,11 +152,11 @@ Weight_Config = {
     },
 }
 
-MinPrice = [] # Minimum Price for Listings
-AvgPrice = [] # Average Price for Listings
-HighestPrice = [] # Highest Price for Listings
-SellThrough = [] # Sell Through Percentage
-
+# MinPrice = [] # Minimum Price for Listings
+# AvgPrice = [] # Average Price for Listings
+# HighestPrice = [] # Highest Price for Listings
+# SellThrough = [] # Sell Through Percentage
+#
 
 def weight():
 
@@ -164,7 +165,7 @@ def weight():
     avg_price = mean(prices) #round(avg_price)
     MinPrice.append(min_price)
     HighestPrice.append(max_price)
-    AvgPrice.append()
+    AvgPrice.append(avg_price)
     did_not_sell = []
     for bid in Bids:
         if bid == 0 or bid == 1:
@@ -182,13 +183,20 @@ def weight():
 ####################################################
 
 def return_Prediction():
-    Min_Final_Weight = []
+    Final_Weight = []
     # total_weight = Weight_Config[]
     ######## Min Weight ###############
 
     print(Weight_Config['MinPrice']['Zero'])
-    if MinPrice[0] == Weight_Config['MinPrice']['Zero']:
-        Min_Final_Weight.append()
+    if MinPrice[0] == Weight_Config['MinPrice']['Max']:
+        Final_Weight.append(Weight_Config['MinPrice']['Total_Weight'])
+    elif MinPrice[0] == Weight_Config['MinPrice']['Zero']:
+        Final_Weight.append(0.00)
+    else:
+        Min_Weight_p_1 = MinPrice[0] - Weight_Config['MinPrice']['Zero']
+        Min_Weight_p_2 =  Min_Weight_p_1 * Weight_Config['MinPrice']['Weight']['Added_Weight']
+    # Sell Through percent is based on percentage not sold base weight accordingly
+    #
     return
 return_Prediction()
 # get_key_data()
