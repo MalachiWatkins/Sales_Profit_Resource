@@ -26,7 +26,6 @@ AvgPrice = []  # Average Price for Listings
 HighestPrice = []  # Highest Price for Listings
 SellThrough = []  # Sell Through Percentage
 
-weight_cat_list = [MinPrice, AvgPrice, HighestPrice, SellThrough]
 ####################################################
 ############# Data Base ############################
 ####################################################
@@ -163,7 +162,7 @@ Weight_Config = {
         'Sell Max': 9.00,
         'Sell Min': 4.32,
         'User Discretion Max': 4.31,
-        'User Discretion Min': 1,
+        'User Discretion Min': 3.83,
         'No Sell Max': 3.82,
         'No Sell Min': 0.00,
 
@@ -174,22 +173,25 @@ Final_Weight = []
 
 
 def return_Prediction():
-
+    Master_List = [MinPrice[0], AvgPrice[0], HighestPrice[0], SellThrough[0]]
+    Master_Cat_List = ['MinPrice', 'AvgPrice', 'HighestPrice', 'SellThrough']
     ######## Min Weight ###############
-    for weight_cat in weight_cat_list:
-        print(weight_cat)
-        if weight_cat[0] == Weight_Config[weight_cat[0]]['Max']:  # Max Weight
-            Finish_Weight.append(Weight_Config[weight_cat]['Total_Weight'])
-        elif weight_cat[0] == Weight_Config[weight_cat]['Zero']:  # Min Weight
-            Final_Weight.append(0.00)
-        elif weight_cat[0] >= Weight_Config[weight_cat]['Zero']:  # Avg Weight
-            Weight_Parse = weight_cat[0] - Weight_Config[weight_cat]['Zero']
-            Weight_Parse_Final = Weight_Parse * \
-                Weight_Config[weight_cat]['Weight']['Added_Weight']
-            Final_Weight.append(Weight_Parse_Final)
+    for config_cat in Master_Cat_List:
+        for data in Master_List:
+            ConfigEntry = Weight_Config[config_cat]
+            if data == ConfigEntry['Max']:
+                Final_Weight.append(ConfigEntry['Total_Weight'])
+            elif data == ConfigEntry['Zero']:
+                Final_Weight.append(0.00)
+            elif data >= ConfigEntry['Zero']:
 
-        else:
-            Final_Weight.append(0.00)
+    elif MinPrice[0] >= Weight_Config['MinPrice']['Zero']:
+        Min_Weight_p_1 = MinPrice[0] - Weight_Config['MinPrice']['Zero']
+        Min_Weight_p_2 = Min_Weight_p_1 * \
+            Weight_Config['MinPrice']['Weight']['Added_Weight']
+        Final_Weight.append(Min_Weight_p_2)
+    else:
+        Final_Weight.append(0.00)
 
     # Sell Through percent is based on percentage not sold base weight accordingly
 
