@@ -99,10 +99,13 @@ def weight():
     AvgPrice.append(avg_price)
 
     ###### Sell Through Calculation #####
-    did_not_sell = []
+    sold_listings = []
     for bid in Bids:
-        if bid == 0 or bid == 1:
-            did_not_sell.append(bid)
+        if bid == 0 or bid == 1: ## Change to an if not statment
+            null = ''
+        else:
+            sold_listings.append(bid)
+
 
     ######## Sell Through Percentage Calculator###############
     sell_through = len(did_not_sell) / len(Bids)
@@ -175,23 +178,32 @@ Final_Weight = []
 def return_Prediction():
     Master_List = [MinPrice[0], AvgPrice[0], HighestPrice[0], SellThrough[0]]
     Master_Cat_List = ['MinPrice', 'AvgPrice', 'HighestPrice', 'SellThrough']
-    print(MinPrice[0])
-    ######## Min Weight ###############
-    for config_cat in Master_Cat_List:
-        for data in Master_List:
-            print(' DATA ' + str(data) + ' ' +config_cat)
 
-            ConfigEntry = Weight_Config[config_cat]
-            if data >= ConfigEntry['Max']:
-                Final_Weight.append(ConfigEntry['Total_Weight'])
-            elif data >= ConfigEntry['Zero']:
-                Weight_Calc_P1 = data - ConfigEntry['Zero']
-                Weight_Calc_Final = Weight_Calc_P1 * ConfigEntry['Weight']['Added_Weight']
-                Final_Weight.append(Weight_Calc_Final)
-                print('Set Weight if not max or min')
-                print(Weight_Calc_Final)
-            else:
-                Final_Weight.append(0.00)
+    ######## Min Weight ###############
+
+    x=0
+    while x < len(Master_List):
+        ConfigEntry = Weight_Config[Master_Cat_List[x]]
+        data = Master_List[x]
+        print(data)
+        if data >= ConfigEntry['Max']:
+
+            Final_Weight.append(ConfigEntry['Total_Weight'])
+        elif data >= ConfigEntry['Zero']:
+            Weight_Calc_P1 = data - ConfigEntry['Zero']
+            Weight_Calc_Final = Weight_Calc_P1 * ConfigEntry['Weight']['Added_Weight']
+            Final_Weight.append(Weight_Calc_Final)
+            print('Set Weight if not max or min')
+            print(Weight_Calc_Final)
+        else:
+            Final_Weight.append(0.00)
+
+        x+=1
+
+
+
+
+
 
     # Sell Through percent is based on percentage not sold base weight accordingly
 
