@@ -184,6 +184,8 @@ def return_Prediction():
             elif data == ConfigEntry['Zero']:
                 Final_Weight.append(0.00)
             elif data >= ConfigEntry['Zero']:
+                Weight_Calc_P1 = data - ConfigEntry['Zero']
+                Weight_Calc_Final = 
 
     elif MinPrice[0] >= Weight_Config['MinPrice']['Zero']:
         Min_Weight_p_1 = MinPrice[0] - Weight_Config['MinPrice']['Zero']
