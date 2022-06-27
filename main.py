@@ -197,14 +197,24 @@ def return_Prediction():
 
         x+=1
 
-
-
-
     return
 
+Results = []
+def final_Score():
+    Weight = sum(Final_Weight)
+    if Weight >= Weight_Config['Prediction']['Sell Min']:
+        Results.append('SELL')
+    elif Weight <= Weight_Config['Prediction']['No Sell Max']:
+        Results.append('NO SELL')
+    elif Weight <=  Weight_Config['Prediction']['User Discretion Max']:
+        if Weight >= Weight_Config['Prediction']['User Discretion Min']:
+            Results.append("USER DISCRETION")
+
+    return
 
 get_key_data()
 weight()
 return_Prediction()
-print(Final_Weight)
+final_Score()
+print(Results)
 time.sleep(1000)
