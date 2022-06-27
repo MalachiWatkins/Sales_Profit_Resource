@@ -108,7 +108,7 @@ def weight():
 
 
     ######## Sell Through Percentage Calculator###############
-    sell_through = len(did_not_sell) / len(Bids)
+    sell_through = len(sold_listings) / len(Bids)
     sell_through_percent = sell_through * 100
     SellThrough.append(sell_through_percent)
     return
@@ -185,16 +185,13 @@ def return_Prediction():
     while x < len(Master_List):
         ConfigEntry = Weight_Config[Master_Cat_List[x]]
         data = Master_List[x]
-        print(data)
-        if data >= ConfigEntry['Max']:
 
+        if data >= ConfigEntry['Max']:
             Final_Weight.append(ConfigEntry['Total_Weight'])
         elif data >= ConfigEntry['Zero']:
             Weight_Calc_P1 = data - ConfigEntry['Zero']
             Weight_Calc_Final = Weight_Calc_P1 * ConfigEntry['Weight']['Added_Weight']
             Final_Weight.append(Weight_Calc_Final)
-            print('Set Weight if not max or min')
-            print(Weight_Calc_Final)
         else:
             Final_Weight.append(0.00)
 
@@ -202,10 +199,6 @@ def return_Prediction():
 
 
 
-
-
-
-    # Sell Through percent is based on percentage not sold base weight accordingly
 
     return
 
