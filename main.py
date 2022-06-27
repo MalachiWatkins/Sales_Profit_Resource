@@ -154,7 +154,7 @@ Weight_Config = {
         'Max': 57,
         'Weight': {
             'Value': 1,
-            'Weight': 0.125
+            'Added_Weight': 0.125
         }
     },
     'Prediction': {
@@ -175,25 +175,23 @@ Final_Weight = []
 def return_Prediction():
     Master_List = [MinPrice[0], AvgPrice[0], HighestPrice[0], SellThrough[0]]
     Master_Cat_List = ['MinPrice', 'AvgPrice', 'HighestPrice', 'SellThrough']
+    print(MinPrice[0])
     ######## Min Weight ###############
     for config_cat in Master_Cat_List:
         for data in Master_List:
+            print(' DATA ' + str(data) + ' ' +config_cat)
+
             ConfigEntry = Weight_Config[config_cat]
-            if data == ConfigEntry['Max']:
+            if data >= ConfigEntry['Max']:
                 Final_Weight.append(ConfigEntry['Total_Weight'])
-            elif data == ConfigEntry['Zero']:
-                Final_Weight.append(0.00)
             elif data >= ConfigEntry['Zero']:
                 Weight_Calc_P1 = data - ConfigEntry['Zero']
-                Weight_Calc_Final = 
-
-    elif MinPrice[0] >= Weight_Config['MinPrice']['Zero']:
-        Min_Weight_p_1 = MinPrice[0] - Weight_Config['MinPrice']['Zero']
-        Min_Weight_p_2 = Min_Weight_p_1 * \
-            Weight_Config['MinPrice']['Weight']['Added_Weight']
-        Final_Weight.append(Min_Weight_p_2)
-    else:
-        Final_Weight.append(0.00)
+                Weight_Calc_Final = Weight_Calc_P1 * ConfigEntry['Weight']['Added_Weight']
+                Final_Weight.append(Weight_Calc_Final)
+                print('Set Weight if not max or min')
+                print(Weight_Calc_Final)
+            else:
+                Final_Weight.append(0.00)
 
     # Sell Through percent is based on percentage not sold base weight accordingly
 
