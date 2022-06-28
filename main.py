@@ -5,14 +5,6 @@ import pdb
 from statistics import mean
 # pdb.set_trace()
 
-####################################################
-############# TO-DO ############################
-####################################################
-
-
-# Finish Prediction Generator
-# Start Django Rest API
-# Start Django Site; Apps, Users, Main
 
 ###################################################
 
@@ -27,10 +19,6 @@ HighestPrice = []  # Highest Price for Listings
 SellThrough = []  # Sell Through Percentage
 
 ####################################################
-############# Data Base ############################
-####################################################
-
-############ Place Holder for django model #########
 
 ####################################################
 ############# Key word Flagging ####################
