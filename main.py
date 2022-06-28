@@ -8,7 +8,6 @@ from statistics import mean
 
 ###################################################
 
-
 Bids = []  # Number of Bids
 Top_20 = []  # First 20 Results
 prices = []  # Price for all Listings
@@ -20,30 +19,19 @@ SellThrough = []  # Sell Through Percentage
 
 ####################################################
 
-####################################################
-############# Key word Flagging ####################
-####################################################
 
-
-def keyword_flagging_Check():  # Checks if Current Keyword flagged
-
-    return
-
-
-def keyword_flagging_new():  # Create a new Kewword flag
-
-    return
 
 ####################################################
 ############# Grabs Key Data #######################
 ####################################################
 
 
-def get_key_data():
+def get_key_data(KEYWORD, PAGES_TO_SEARCH, PAGE_NUMBER):
+
     ############# Global Vars for api payload ################
-    Key_word = "Test"  # Keyword for Seacrch
-    pages_to_search = 5  # Number of Pages to Search
-    page_number = 1  # Starting Page Number
+    Key_word = KEYWORD # Keyword for Seacrch
+    pages_to_search = PAGES_TO_SEARCH  # Number of Pages to Search
+    page_number = PAGE_NUMBER  # Starting Page Number
     ##########################################################
 
     ############ API Call ##############
@@ -52,9 +40,7 @@ def get_key_data():
         #### Json Payload for searching API #####
         Keyword_payload = {"isSize": False, "isWeddingCatagory": "False", "isMultipleCategoryIds": False, "isFromHeaderMenuTab": False, "layout": "", "searchText": Key_word, "selectedGroup": "", "selectedCategoryIds": "", "selectedSellerIds": "", "lowPrice": "0", "highPrice": "999999", "searchBuyNowOnly": "", "searchPickupOnly": "False", "searchNoPickupOnly": "False", "searchOneCentShippingOnly": "False", "searchDescriptions": "False",
                            "searchClosedAuctions": "true", "closedAuctionEndingDate": "6/16/2022", "closedAuctionDaysBack": "150", "searchCanadaShipping": "False", "searchInternationalShippingOnly": "False", "sortColumn": "1", "page": page_number, "pageSize": "40", "sortDescending": "true", "savedSearchId": 0, "useBuyerPrefs": "true", "searchUSOnlyShipping": "true", "categoryLevelNo": "1", "categoryLevel": 1, "categoryId": 0, "partNumber": "", "catIds": ""}
-
-        response = requests.post('https://buyerapi.shopgoodwill.com/api/Search/ItemListing',
-                                 json=Keyword_payload)  # Json response from API
+        response = requests.post('https://buyerapi.shopgoodwill.com/api/Search/ItemListing', json=Keyword_payload)  # Json response from API
         json_response = response.json()
 
         ######## Parse all listings and get the key data used for Prediction ########
@@ -200,9 +186,15 @@ def final_Score():
 
     return
 
-get_key_data()
-weight()
-return_Prediction()
-final_Score()
+def main(KEYWORD, PAGES_TO_SEARCH, PAGE_NUMBER):  # Checks if Current Keyword flagged
+
+    get_key_data(KEYWORD = KEYWORD, PAGES_TO_SEARCH = PAGES_TO_SEARCH, PAGE_NUMBER = PAGE_NUMBER)
+    weight()
+    return_Prediction()
+    final_Score()
+    return
+
+main(KEYWORD='Test', PAGES_TO_SEARCH = 5, PAGE_NUMBER = 1)
+
 print(Results)
 time.sleep(1000)
